@@ -18,8 +18,6 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { useQuery } from '@tanstack/react-query';
-import { api } from '@/lib/api';
 
 type Props = {
   categoryKey: string;
@@ -41,11 +39,6 @@ export default function Filters({
   categories,
 }: Props) {
   const ALL_CATEGORIES = 'All';
-
-  const cats = useQuery({
-    queryKey: ['categories'],
-    queryFn: () => api<Category[]>('/categories'),
-  });
 
   return (
     <Card>
@@ -130,7 +123,7 @@ export default function Filters({
               variant="ghost"
               className="font-normal"
               onClick={onClear}
-              disabled={!from && !to && categoryKey === 'ALL'}
+              disabled={!from && !to && categoryKey === ALL_CATEGORIES}
             >
               Clear filters
             </Button>
